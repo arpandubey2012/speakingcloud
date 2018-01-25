@@ -1,0 +1,26 @@
+const AWS = require('aws-sdk');
+const Ddb = new AWS.DynamoDB.DocumentClient({region:'us-east-2'});
+
+exports.handler = (event, context, callback) => {
+    // TODO implement
+    let dbParams ={
+        TableName: 'UserDetails',
+        Limit : 10
+    };
+  
+    /*  let dbParams ={
+        TableName: 'UserDetails',
+        Key:{
+            "ID" : "101"
+        }
+   };*/
+    Ddb.scan(dbParams,function(err,data){
+   // Ddb.get(dbParams,function(err,data){ 
+        if (err) {
+            callback(err,null);
+        }
+        else
+        callback(null,data);
+    })
+    //callback(null, 'Hello from Lambda');
+};
